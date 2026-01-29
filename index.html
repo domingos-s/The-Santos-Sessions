@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smooth Groove</title>
+  <style>
+    :root { color-scheme: light; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#f4f1ea;
+      color:#111;
+      display:flex;
+      min-height:100vh;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    /* The "card" is now the album art background */
+    .card{
+      width:min(820px, 100%);
+      border-radius:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      overflow:hidden;
+      position:relative;
+
+      /* album image as background */
+      background-image: url("album.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      /* keeps a nice “poster” shape; adjust if you want */
+      aspect-ratio: 2 / 3;
+    }
+
+    /* On very short screens, let it shrink without overflowing */
+    @media (max-height: 720px) {
+      .card { aspect-ratio: 3 / 4; }
+    }
+
+    /* Audio sits over the background about 20% up from the bottom */
+    .audio-wrap{
+      position:absolute;
+      left: 6%;
+      right: 6%;
+      bottom: 3%;
+
+      padding: 12px 14px;
+      border-radius: 14px;
+
+      /* readable on top of art */
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+
+    audio{
+      width:100%;
+      display:block;
+    }
+
+    /* Optional: small “fade” to improve readability if needed */
+    .audio-wrap::before{
+      content:"";
+      position:absolute;
+      inset:-18px -18px -18px -18px;
+      border-radius: 18px;
+      pointer-events:none;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.14), rgba(255,255,255,0) 70%);
+      z-index:-1;
+    }
+  </style>
+</head>
+<body>
+  <main class="card" aria-label="Smooth Groove album art with audio player">
+    <div class="audio-wrap">
+      <audio controls preload="metadata">
+        <source src="JammingwithCaleb.wav" type="audio/wav" />
+        Your browser doesn’t support the audio element.
+      </audio>
+    </div>
+  </main>
+</body>
+</html>
